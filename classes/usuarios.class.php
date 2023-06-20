@@ -2,7 +2,7 @@
 
 class Usuarios
 {
-    public static function login()
+    public function login()
     {
         if ($_POST) {
             if (!$_POST['login'] OR !$_POST['senha']) {
@@ -52,7 +52,7 @@ class Usuarios
 
     }
 
-    public static function verificar()
+    public function verificar()
     {
         $headers = apache_request_headers();
         if (isset($headers['authorization'])) {

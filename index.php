@@ -19,15 +19,22 @@ if(isset($path[1])) { $acao = $path[1]; } else { $acao = ""; }
 
 if(isset($path[2])) { $param = $path[2]; } else { $param = ""; }
 
-$method = $_SERVER["REQUEST_METHOD"];
+// $method = $_SERVER["REQUEST_METHOD"];
 
 $GLOBALS['secretJWT'] = '123456';
 
-//CLASSES
-include_once "classes/db.class.php";
-include_once "classes/jwt.class.php";
-include_once "classes/usuario.class.php";
+# CLASSES
+include_once "classes/autoload.class.php";
 
-//API'S
-include_once "api/clientes/usuarios.php";
-include_once "api/clientes/clientes.php";
+new Autoload();
+
+
+# ROTAS
+
+$rota = new Rotas();
+
+$rota->add('POST', '/usuarios/login', 'Usuarios::login', false);
+$rota->add('GET', '/clientes/listar', 'Clientes::listarTodos', true);
+$rota->add('GET', '/clientes/listar/[id]', 'Clientes::listarUnico', true);
+
+$rota->ir($_GET['path']);
