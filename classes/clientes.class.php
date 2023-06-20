@@ -10,15 +10,15 @@ class Clientes
     $obj = $rs->fetchAll(PDO::FETCH_ASSOC);
 
     if(isset($obj)){
-      json_encode(["dados" => $obj]);
+      echo json_encode(["dados" => $obj]);
     }
     else{
-      json_encode(["dados" => "Não existem dados para retornar"]);
+      echo json_encode(["dados" => "Não existem dados para retornar"]);
 
     }
   }
 
-  public function listarUnico()
+  public function listarUnico($param)
   {
     $db = DB::connect();
     $rs = $db->prepare("SELECT * FROM clientes WHERE id={$param} ORDER BY nome");
@@ -80,7 +80,7 @@ class Clientes
     }
   } 
 
-  public function atualizar()
+  public function atualizar($param)
   {
     array_shift($_POST); //elimina o campo _method
 
@@ -113,7 +113,7 @@ class Clientes
     }
   } 
 
-  public function excluir()
+  public function excluir($param)
   {
     array_shift($_POST); //elimina o campo _method
 
